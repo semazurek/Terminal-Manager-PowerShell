@@ -1,5 +1,6 @@
 # Terminal Manager
 
+PowerShell Script for remote management of computers in a domain.  
 
 ## What it can do
 
