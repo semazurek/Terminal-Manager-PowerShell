@@ -1,6 +1,6 @@
 # Terminal Manager
 
-PowerShell Script for remote management of computers in a domain.  
+PowerShell Script for remote management computers in a domain.  
 Getch information about local station.
 
 ## What it can do
