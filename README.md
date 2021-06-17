@@ -6,13 +6,14 @@
 ## What it can do
 
 The script has such things as:  
-
-Active Directory, Remote Desktop and PowerShell as Admin lunch,   
-Remote shutdown, restart and logout users from the station.  
-Information about current station.  
-Send remote messages to the station.  
-Show the current station storage serial numbers.  
-
+<ul>
+  <li>Active Directory, Remote Desktop and PowerShell as Admin lunch, </li>  
+  <li>Remote shutdown, restart and logout users from the station.  </li>
+  <li>Information about current station.  </li>
+  <li>Send remote messages to the station.  </li>
+  <li>Show the current station storage serial numbers.  </li>
+</ul>
+  
 ## How to use
 
 You will probably need to change credentials to Domain Administrator of AD.  
