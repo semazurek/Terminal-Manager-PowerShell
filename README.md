@@ -1,1 +1,1 @@
-"# Terminal Manager" 
+# Terminal Manager
