@@ -1,7 +1,7 @@
 # Terminal Manager
 
 PowerShell Script for remote management computers in a domain.  
-Getch information about local station.
+Getch information about local station. Last tested on Windows 10 Enterprise version 1903.  
 
 ## What it can do
 
