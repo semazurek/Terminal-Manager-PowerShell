@@ -43,7 +43,7 @@ $credent = 'JohnSmith@Workdomain.com'
 ## Tips
 
 ### Get information about remote station
-Use option **[6] Executing commands at the station**  
+Use option: **[6] Executing commands at the station**  
 Type IP/Hostname and Command:  
 ```
 systeminfo > C:\file.txt
@@ -54,5 +54,17 @@ After that in windows explorer type:
 ```
 And view **file.txt** with all information in it.
 
+### Get information about installed printers on station
+Use option: **[8] Powershell as Administrator**  
 
-
+```
+Get-Printer -ComputerName IP/Hostname
+```
+This command provides information like:  
+<ul>
+  <li>Name of driver</li>
+  <li>Local/Shared Printer</li>
+  <li>Published (to others shared)</li>
+  <li>Driver Name</li>
+  <li>Port Name</li>
+</ul>
