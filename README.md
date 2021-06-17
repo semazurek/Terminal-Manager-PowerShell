@@ -40,4 +40,19 @@ $credent = 'JohnSmith@Workdomain.com'
 ```
 *And you are ready to go !*
 
+## Tips
+
+### Get information about remote station
+Use option **[6] Executing commands at the station**  
+Type IP/Hostname and Command:  
+```
+systeminfo > C:\file.txt
+```
+After that in windows explorer type:  
+```
+\\IP/Hostname\c$
+```
+And view **file.txt** with all information in it.
+
+
 
