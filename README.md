@@ -7,7 +7,7 @@
 
 The script has such things as:  
 <ul>
-  <li>Active Directory, Remote Desktop and PowerShell as Admin lunch, </li>  
+  <li>Active Directory, Remote Desktop and PowerShell as Admin launch, </li>  
   <li>Remote shutdown, restart and logout users from the station.  </li>
   <li>Information about current station.  </li>
   <li>Send remote messages to the station.  </li>
