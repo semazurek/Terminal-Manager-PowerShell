@@ -54,7 +54,7 @@ After that in windows explorer type:
 ```
 And view **file.txt** with all information in it.
 
-### Get information about installed printers on station
+### Get information about installed printers on remote station
 Use option: **[8] Powershell as Administrator**  
 
 ```
