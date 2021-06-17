@@ -1,7 +1,5 @@
 # Terminal Manager
 
-## First look
-![ss2](https://user-images.githubusercontent.com/85984736/122421879-fce26a80-cf8c-11eb-9a8d-50a00a2ebf75.png)
 
 ## What it can do
 
@@ -13,6 +11,10 @@ The script has such things as:
   <li>Send remote messages to the station.  </li>
   <li>Show the current station storage serial numbers.  </li>
 </ul>
+
+## First look
+![ss2](https://user-images.githubusercontent.com/85984736/122421879-fce26a80-cf8c-11eb-9a8d-50a00a2ebf75.png)
+
   
 ## How to use
 
