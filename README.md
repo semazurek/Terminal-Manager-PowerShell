@@ -38,7 +38,7 @@ or
 ```
 $credent = 'JohnSmith@Workdomain.com'
 ```
-*And you are ready to go !*
+<p align="center">*And you are ready to go !*</p>
 
 ## Tips
 
