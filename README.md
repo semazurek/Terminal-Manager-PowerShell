@@ -14,7 +14,11 @@ The script has such things as:
   <li>Show the current station storage serial numbers.  </li>
 </ul>
 
-## First look
+## First look NEW (GUI)
+![image](https://user-images.githubusercontent.com/85984736/216607937-a80143a9-7101-417a-bb86-d82eda4ba29a.png)
+
+
+## First look OLD
 ![ss2](https://user-images.githubusercontent.com/85984736/122421879-fce26a80-cf8c-11eb-9a8d-50a00a2ebf75.png)
 
   
