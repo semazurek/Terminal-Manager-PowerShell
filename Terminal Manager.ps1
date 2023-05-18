@@ -8,7 +8,6 @@ $credent = $env:USERNAME+'@'+$env:USERDOMAIN
 
 $versionPS="Terminal Manager v2.3.2.3"
 $HOST.UI.RAWUI.WINDOWTITLE = $versionPS
-$ip_host = ""
 $ErrorActionPreference = "SilentlyContinue"
 
 [reflection.assembly]::LoadWithPartialName( 'System.Windows.Forms'); 
@@ -214,6 +213,7 @@ function do_logoffID {
 function do_logoff {
 	if (![string]::IsNullOrWhitespace($IP_TEXT.Text))
 		{
+$hostn = $IP_TEXT.Text;
 $logoffForm = New-Object System.Windows.Forms.Form;  
 $logoffFormB = New-Object System.Windows.Forms.Button; 
 $logoffForm.MinimizeBox = $false; 
@@ -249,7 +249,7 @@ $logoffFormB.FlatStyle = 'Flat'
 $logoffFormB.add_click({do_logoffID;});
 $logoffForm.Controls.Add($logoffFormB); 
 
-$userlogin = query user /server:$ip_host
+$userlogin = query user /server:$hostn
 
 $Users_TEXT = New-Object System.Windows.Forms.TextBox
 $Users_TEXT.Location = New-Object System.Drawing.Point(20,20)
