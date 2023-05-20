@@ -1,12 +1,14 @@
 <#
-Script by Rikey 2023.02.03
+Script by Rikey 2023.05.19
 LAUNCH SCRIPT VIA POWERSHELL
 #>
 
 #credent = $env:USERNAME
 $credent = $env:USERNAME+'@'+$env:USERDOMAIN
 
-$versionPS="Terminal Manager v2.3.2.3"
+$PSDefaultParameterValues['*:Encoding'] = 'utf8'
+
+$versionPS="Terminal Manager"
 $HOST.UI.RAWUI.WINDOWTITLE = $versionPS
 $ErrorActionPreference = "SilentlyContinue"
 
@@ -16,7 +18,7 @@ Add-Type -AssemblyName System.Windows.Forms
 [System.Windows.Forms.Application]::EnableVisualStyles()
 
 $form= New-Object Windows.Forms.Form; 
-$form.Size = New-Object System.Drawing.Size(835,380); 
+$form.Size = New-Object System.Drawing.Size(715,380); 
 $form.StartPosition = 'CenterScreen'; 
 $form.FormBorderStyle = 'FixedDialog'; 
 $form.Text = $versionPS; 
@@ -25,21 +27,19 @@ $form.StartPosition = [System.Windows.Forms.FormStartPosition]::CenterScreen;
 $form.MinimizeBox = $false; 
 $form.MaximizeBox = $false; 
 $Font = New-Object System.Drawing.Font('Consolas',9,[System.Drawing.FontStyle]::Regular); 
+$Color = '#eeeeee'
 $form.BackColor = [System.Drawing.ColorTranslator]::FromHtml('#252525')
-$form.ForeColor = [System.Drawing.ColorTranslator]::FromHtml('#eeeeee')
+$form.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($Color)
 $form.Font = $Font;  
 
 $G_Remote = New-Object System.Windows.Forms.GroupBox
 $G_Remote.Location = '10,30' 
-$G_Remote.size = '570,300'
+$G_Remote.size = '680,300'
 $G_Remote.text = 'Remote'
 $G_Remote.Visible = $true
 $G_Remote.Font = New-Object System.Drawing.Font('Consolas',11,[System.Drawing.FontStyle]::Bold); 
-$G_Remote.ForeColor = [System.Drawing.ColorTranslator]::FromHtml('#eeeeee')
+$G_Remote.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($Color)
 $form.controls.Add($G_Remote) 
-$G_Remote.add_MouseLeave({
-	SaveIP;
-});
 
 $G_Command = New-Object System.Windows.Forms.GroupBox
 $G_Command.Location = '10,60' 
@@ -47,16 +47,20 @@ $G_Command.size = '400,115'
 $G_Command.text = 'Execute Command'
 $G_Command.Visible = $true
 $G_Command.Font = New-Object System.Drawing.Font('Consolas',11,[System.Drawing.FontStyle]::Bold); 
-$G_Command.ForeColor = [System.Drawing.ColorTranslator]::FromHtml('#eeeeee')
-$G_Remote.controls.Add($G_Command) 
+$G_Command.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($Color)
+$G_Remote.controls.Add($G_Command)
+$G_Command.add_MouseHover({
+$tooltip9 = New-Object System.Windows.Forms.ToolTip
+$tooltip9.SetToolTip($G_Command, "Wykonaj zdalnie komende na stacji.")
+}) 
 
 $G_Actions = New-Object System.Windows.Forms.GroupBox
 $G_Actions.Location = '420,60' 
-$G_Actions.size = '140,230'
+$G_Actions.size = '250,230'
 $G_Actions.text = 'Actions'
 $G_Actions.Visible = $true
 $G_Actions.Font = New-Object System.Drawing.Font('Consolas',11,[System.Drawing.FontStyle]::Bold); 
-$G_Actions.ForeColor = [System.Drawing.ColorTranslator]::FromHtml('#eeeeee')
+$G_Actions.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($Color)
 $G_Remote.controls.Add($G_Actions) 
 
 $G_Message = New-Object System.Windows.Forms.GroupBox
@@ -65,28 +69,26 @@ $G_Message.size = '400,115'
 $G_Message.text = 'Send Message'
 $G_Message.Visible = $true
 $G_Message.Font = New-Object System.Drawing.Font('Consolas',11,[System.Drawing.FontStyle]::Bold); 
-$G_Message.ForeColor = [System.Drawing.ColorTranslator]::FromHtml('#eeeeee')
+$G_Message.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($Color)
 $G_Remote.controls.Add($G_Message) 
-
-$G_Info = New-Object System.Windows.Forms.GroupBox
-$G_Info.Location = '590,30' 
-$G_Info.size = '220,300'
-$G_Info.text = 'Information'
-$G_Info.BackColor = [System.Drawing.ColorTranslator]::FromHtml('#323232');
-$G_Info.Visible = $true
-$G_Info.Font = New-Object System.Drawing.Font('Consolas',11,[System.Drawing.FontStyle]::Bold); 
-$G_Info.ForeColor = [System.Drawing.ColorTranslator]::FromHtml('#eeeeee')
-$form.controls.Add($G_Info) 
+$G_Message.add_MouseHover({
+$tooltip8 = New-Object System.Windows.Forms.ToolTip
+$tooltip8.SetToolTip($G_Message, "Wyślij komunikat do stacji.")
+})
 
 
 $B_gpupdate = New-Object Windows.Forms.Button; 
-$B_gpupdate.text = 'Gpupdate'; 
+$B_gpupdate.text = 'GpUpdate + WinUpdate'; 
 $B_gpupdate.FlatStyle = 'Flat'
 $B_gpupdate.Location = New-Object Drawing.Point 20,30; 
 $B_gpupdate.Size = New-Object Drawing.Point 100,40;
 $B_gpupdate.Font = New-Object System.Drawing.Font('Consolas',11,[System.Drawing.FontStyle]::Regular);
 $B_gpupdate.add_click({do_gp;}); 
 $G_Actions.controls.add($B_gpupdate);
+$B_gpupdate.add_MouseHover({
+$tooltip1 = New-Object System.Windows.Forms.ToolTip
+$tooltip1.SetToolTip($B_gpupdate, "gpupdate /force i windows update.")
+})
 
 $B_restart = New-Object Windows.Forms.Button; 
 $B_restart.text = 'Restart'; 
@@ -96,6 +98,10 @@ $B_restart.Size = New-Object Drawing.Point 100,40;
 $B_restart.Font = New-Object System.Drawing.Font('Consolas',11,[System.Drawing.FontStyle]::Regular);
 $B_restart.add_click({do_restart;}); 
 $G_Actions.controls.add($B_restart);
+$B_restart.add_MouseHover({
+$tooltip2 = New-Object System.Windows.Forms.ToolTip
+$tooltip2.SetToolTip($B_restart, "Restartuje stacje po 10 sekundach.")
+})
 
 $B_shutdown = New-Object Windows.Forms.Button; 
 $B_shutdown.text = 'Shutdown'; 
@@ -105,6 +111,10 @@ $B_shutdown.Size = New-Object Drawing.Point 100,40;
 $B_shutdown.Font = New-Object System.Drawing.Font('Consolas',11,[System.Drawing.FontStyle]::Regular);
 $B_shutdown.add_click({do_shutdown;}); 
 $G_Actions.controls.add($B_shutdown);
+$B_shutdown.add_MouseHover({
+$tooltip3 = New-Object System.Windows.Forms.ToolTip
+$tooltip3.SetToolTip($B_shutdown, "Wyłącza stacje po 10 sekundach.")
+})
 
 $B_logoff = New-Object Windows.Forms.Button; 
 $B_logoff.text = 'Logoff'; 
@@ -114,44 +124,58 @@ $B_logoff.Size = New-Object Drawing.Point 100,40;
 $B_logoff.Font = New-Object System.Drawing.Font('Consolas',11,[System.Drawing.FontStyle]::Regular);
 $B_logoff.add_click({do_logoff;}); 
 $G_Actions.controls.add($B_logoff);
+$B_logoff.add_MouseHover({
+$tooltip4 = New-Object System.Windows.Forms.ToolTip
+$tooltip4.SetToolTip($B_logoff, "Wyloguj wybranego użytkownika.")
+})
 
-function SaveIP
-{
-	$ip_host = $IP_TEXT.Text;
-	
-	if ($ip_host -like "*.*" -and ![string]::IsNullOrWhitespace($ip_host)) { 
-	if ($ip_host.length -gt 6)
-	{
-	$hostnamer = [system.net.dns]::gethostentry($ip_host) | select -ExpandProperty HostName
-	$label5.Text = $ip_host
-	$label4.Text = $hostnamer
-	$label4.Visible = $true
-	$label5.Visible = $true
-	$userlogin = query user /server:$ip_host | Select-String '(\w+)' | ForEach-Object { $_.Matches[0].Groups[1].Value }
-	$userlogin = $userlogin -replace 'USERNAME', ''
-	$label6.Text = $userlogin
-	$label6.Visible = $true
-	}
-	}
-	else 
-	{
-		if (![string]::IsNullOrWhitespace($ip_host) -and $ip_host.length -gt 2)
-		{
-		$hostnamer = [system.net.dns]::gethostbyname($ip_host)
-		$IPlabel_0 = $hostnamer.AddressList[0].IPAddressToString
-		$IPlabel_1 = $hostnamer.AddressList[1].IPAddressToString
-		$IPlabel_2 = $hostnamer.AddressList[2].IPAddressToString
-		$label5.Text = $IPlabel_0
-		$label4.Text = $ip_host
-		$label4.Visible = $true
-		$label5.Visible = $true
-		$userlogin = query user /server:$ip_host | Select-String '(\w+)' | ForEach-Object { $_.Matches[0].Groups[1].Value }
-		$userlogin = $userlogin -replace 'USERNAME', ''
-		$userlogin = $userlogin.Split([System.Environment]::NewLine,[System.StringSplitOptions]::RemoveEmptyEntries) 
-		$label6.Text = $userlogin
-		$label6.Visible = $true
-		}
-	}
+$B_printer = New-Object Windows.Forms.Button; 
+$B_printer.text = 'Show Printers'; 
+$B_printer.FlatStyle = 'Flat'
+$B_printer.Location = New-Object Drawing.Point 130,30; 
+$B_printer.Size = New-Object Drawing.Point 100,40;
+$B_printer.Font = New-Object System.Drawing.Font('Consolas',11,[System.Drawing.FontStyle]::Regular);
+$B_printer.add_click({do_print;}); 
+$G_Actions.controls.add($B_printer);
+$B_printer.add_MouseHover({
+$tooltip5 = New-Object System.Windows.Forms.ToolTip
+$tooltip5.SetToolTip($B_printer, "Wyświetl podłączone do stacji drukarki.")
+})
+
+$B_information = New-Object Windows.Forms.Button; 
+$B_information.text = 'Show Info'; 
+$B_information.FlatStyle = 'Flat'
+$B_information.Location = New-Object Drawing.Point 130,80; 
+$B_information.Size = New-Object Drawing.Point 100,40;
+$B_information.Font = New-Object System.Drawing.Font('Consolas',11,[System.Drawing.FontStyle]::Regular);
+$B_information.add_click({do_information;}); 
+$G_Actions.controls.add($B_information);
+$B_information.add_MouseHover({
+$tooltip6 = New-Object System.Windows.Forms.ToolTip
+$tooltip6.SetToolTip($B_information, "Wyświetl informacje o stacji.")
+})
+
+$B_printer2 = New-Object Windows.Forms.Button; 
+$B_printer2.text = 'Reload Printers'; 
+$B_printer2.FlatStyle = 'Flat'
+$B_printer2.Location = New-Object Drawing.Point 130,130; 
+$B_printer2.Size = New-Object Drawing.Point 100,40;
+$B_printer2.Font = New-Object System.Drawing.Font('Consolas',11,[System.Drawing.FontStyle]::Regular);
+$B_printer2.add_click({do_res_printers;}); 
+$G_Actions.controls.add($B_printer2);
+$B_printer2.add_MouseHover({
+$tooltip7 = New-Object System.Windows.Forms.ToolTip
+$tooltip7.SetToolTip($B_printer2, "Restart usługi Bufora Wydruku")
+})
+
+function init_menu {
+$mainMenu.BackColor = [System.Drawing.ColorTranslator]::FromHtml('#0f4c91')
+
+$form.BackColor = [System.Drawing.ColorTranslator]::FromHtml('#0d4482')
+$extraForm.BackColor = [System.Drawing.ColorTranslator]::FromHtml('#0d4482')
+$logoffForm.BackColor = [System.Drawing.ColorTranslator]::FromHtml('#0d4482')
+$aboutForm.BackColor = [System.Drawing.ColorTranslator]::FromHtml('#0d4482')
+$form.Text = $versionPS;
 };
 
 function do_ad {
@@ -166,6 +190,8 @@ function do_gp {
 	if (![string]::IsNullOrWhitespace($IP_TEXT.Text))
 		{
 	$hostn = $IP_TEXT.Text;
+    runas /savecred /user:$credent "powershell Invoke-Command -ComputerName $hostn -ScriptBlock {wuauclt.exe /updatenow}"
+    sleep 1
 	runas /savecred /user:$credent "powershell Invoke-Command -ComputerName $hostn -ScriptBlock {gpupdate /force}"
 		}
 };
@@ -225,7 +251,7 @@ $logoffForm.FormBorderStyle = 'FixedDialog';
 $logoffForm.ClientSize = '620, 225'; 
 $logoffForm.ShowInTaskBar = $false; 
 $logoffForm.BackColor = [System.Drawing.ColorTranslator]::FromHtml('#252525')
-$logoffForm.ForeColor = [System.Drawing.ColorTranslator]::FromHtml('#eeeeee')
+$logoffForm.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($Color)
 $logoffForm.StartPosition = 'CenterScreen'; 
 $logoffForm.Text = 'Logoff'; 
 $logoffForm.Font = $font;
@@ -249,6 +275,8 @@ $logoffFormB.FlatStyle = 'Flat'
 $logoffFormB.add_click({do_logoffID;});
 $logoffForm.Controls.Add($logoffFormB); 
 
+init_menu;
+
 $userlogin = query user /server:$hostn
 
 $Users_TEXT = New-Object System.Windows.Forms.TextBox
@@ -266,20 +294,45 @@ $Users_TEXT.Text= $userlogin
 		}
 }; 
 
+function do_print {
+		if (![string]::IsNullOrWhitespace($IP_TEXT.Text))
+		{
+	$hostn = $IP_TEXT.Text;
+	runas /savecred /user:$credent "powershell Get-Printer -ComputerName $hostn; pause"
+		}
+};
+
+function do_information {
+		if (![string]::IsNullOrWhitespace($IP_TEXT.Text))
+		{
+	$hostn = $IP_TEXT.Text;
+    runas /savecred /user:$credent "powershell Invoke-Command -ComputerName $hostn -ScriptBlock {systeminfo > c:\log-stacji.txt}; start \\$hostn\c$\log-stacji.txt"
+		}
+};
+
+function do_res_printers {
+		if (![string]::IsNullOrWhitespace($IP_TEXT.Text))
+		{
+	$hostn = $IP_TEXT.Text;
+    runas /savecred /user:$credent "powershell Invoke-Command -ComputerName $hostn -ScriptBlock {net stop spooler}"
+    Sleep 5
+    runas /savecred /user:$credent "powershell Invoke-Command -ComputerName $hostn -ScriptBlock {net start spooler}"
+		}
+};
+
+init_menu;
+
 $label1 = New-Object Windows.Forms.Label; 
-$label1.Location = New-Object Drawing.Point 140,28; 
+$label1.Location = New-Object Drawing.Point 190,28; 
 $label1.Size = New-Object Drawing.Point 110,25; 
 $label1.text = 'IP/Hostname:'; 
 $label1.Font = New-Object System.Drawing.Font('Consolas',11,[System.Drawing.FontStyle]::Bold); 
 $G_Remote.controls.add($label1); 
 
 $IP_TEXT = New-Object System.Windows.Forms.TextBox
-$IP_TEXT.Location = New-Object System.Drawing.Point(250,25)
+$IP_TEXT.Location = New-Object System.Drawing.Point(300,25)
 $IP_TEXT.Size = New-Object System.Drawing.Size(150,20)
 $G_Remote.controls.Add($IP_TEXT)
-$IP_TEXT.add_MouseLeave({
-	SaveIP;
-});
 
 $label2 = New-Object Windows.Forms.Label; 
 $label2.Location = New-Object Drawing.Point 10,51; 
@@ -323,30 +376,7 @@ $B_Message.Font = New-Object System.Drawing.Font('Consolas',11,[System.Drawing.F
 $B_Message.add_click({do_message;}); 
 $G_Message.controls.add($B_Message);
 
-$label4 = New-Object Windows.Forms.Label; 
-$label4.Location = New-Object Drawing.Point 10,30; 
-$label4.Size = New-Object Drawing.Point 200,25; 
-$label4.text = 'Hostname'; 
-$label4.Visible = $false;
-$label4.Font = New-Object System.Drawing.Font('Consolas',11,[System.Drawing.FontStyle]::Bold); 
-$G_Info.controls.add($label4); 
-
-$label5 = New-Object Windows.Forms.Label; 
-$label5.Location = New-Object Drawing.Point 10,55; 
-$label5.Size = New-Object Drawing.Point 200,25; 
-$label5.text = '127.0.0.1'; 
-$label5.Visible = $false;
-$label5.Font = New-Object System.Drawing.Font('Consolas',11,[System.Drawing.FontStyle]::Bold); 
-$G_Info.controls.add($label5); 
-
-$label6 = New-Object Windows.Forms.Label; 
-$label6.Location = New-Object Drawing.Point 10,80; 
-$label6.Size = New-Object Drawing.Point 200,100; 
-$label6.text = 'Username'; 
-$label6.Visible = $false;
-$label6.Font = New-Object System.Drawing.Font('Consolas',11,[System.Drawing.FontStyle]::Bold); 
-$G_Info.controls.add($label6); 
-
+init_menu;
 
 function Extras {
 $extraForm = New-Object System.Windows.Forms.Form;  
@@ -368,7 +398,7 @@ $extraForm.CancelButton = $extraFormExit;
 $extraForm.ClientSize = '200, 225'; 
 $extraForm.ShowInTaskBar = $false; 
 $extraForm.BackColor = [System.Drawing.ColorTranslator]::FromHtml('#252525')
-$extraForm.ForeColor = [System.Drawing.ColorTranslator]::FromHtml('#eeeeee')
+$extraForm.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($Color)
 $extraForm.StartPosition = 'CenterScreen'; 
 $extraForm.Text = 'Extras'; 
 $extraForm.Font = $font;
@@ -425,8 +455,50 @@ $extraFormB10.add_click({eventvwr.msc});
 $extraFormB10.FlatStyle = 'Flat'
 $extraForm.Controls.Add($extraFormB10); 
 
+init_menu; 
+
 [void]$extraForm.ShowDialog()
 }; 
+
+function AboutF {
+$aboutForm = New-Object System.Windows.Forms.Form; 
+$aboutFormExit = New-Object System.Windows.Forms.Button; 
+$aboutFormNameLabel = New-Object System.Windows.Forms.Label; 
+$aboutFormText = New-Object System.Windows.Forms.Label; 
+$aboutForm.MinimizeBox = $false; 
+$aboutForm.MaximizeBox = $false; 
+$aboutForm.TopMost = $true; 
+$aboutForm.FlatStyle = 'Flat'
+$aboutForm.BackColor = [System.Drawing.ColorTranslator]::FromHtml('#252525')
+$aboutForm.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($Color)
+$aboutForm.AutoSizeMode = 'GrowAndShrink'; 
+$aboutForm.FormBorderStyle = 'FixedDialog'; 
+$aboutForm.AcceptButton = $aboutFormExit; 
+$aboutForm.CancelButton = $aboutFormExit; 
+$aboutForm.ClientSize = '350, 110'; 
+$aboutForm.ControlBox = $false; 
+$aboutForm.ShowInTaskBar = $false; 
+$aboutForm.StartPosition = 'CenterParent'; 
+$aboutForm.Text = 'About'; 
+$aboutForm.Add_Load($aboutForm_Load); 
+$aboutFormNameLabel.Font = New-Object Drawing.Font('Consolas', 9, [System.Drawing.FontStyle]::Bold); 
+$aboutFormNameLabel.Location = '110, 10'; 
+$aboutFormNameLabel.Size = '200, 18'; 
+$aboutFormNameLabel.Text = ' Terminal Manager'; 
+$aboutForm.Controls.Add($aboutFormNameLabel); 
+$aboutFormText.Location = '100, 40'; 
+$aboutFormText.Size = '300, 20'; $aboutFormText.Text = '        Sebastian Mazurek'; 
+$aboutForm.Controls.Add($aboutFormText); 
+$aboutFormExit.Location = '138, 75'; 
+$aboutFormExit.Text = 'OK'; 
+$aboutFormExit.FlatStyle = 'Flat'
+$aboutForm.Controls.Add($aboutFormExit); 
+
+init_menu; 
+
+[void]$aboutForm.ShowDialog()
+};
+
 function addMenuItem { param([ref]$ParentItem, [string]$ItemName='', [string]$ItemText='', [scriptblock]$ScriptBlock=$null ) [System.Windows.Forms.ToolStripMenuItem]$private:menuItem=` New-Object System.Windows.Forms.ToolStripMenuItem;
 $private:menuItem.Name =$ItemName; 
 $private:menuItem.Text =$ItemText; 
@@ -434,17 +506,22 @@ if ($ScriptBlock -ne $null) { $private:menuItem.add_Click(([System.EventHandler]
 if (($ParentItem.Value) -is [System.Windows.Forms.MenuStrip]) { ($ParentItem.Value).Items.Add($private:menuItem);} return $private:menuItem; }; 
 [System.Windows.Forms.MenuStrip]$mainMenu=New-Object System.Windows.Forms.MenuStrip; $form.Controls.Add($mainMenu); 
 $mainMenu.BackColor = [System.Drawing.ColorTranslator]::FromHtml('#323232');
-$mainMenu.ForeColor = [System.Drawing.ColorTranslator]::FromHtml('#eeeeee');
+$mainMenu.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($Color);
 [scriptblock]$exit= {$form.Close()}; 
 [scriptblock]$activedirectory= {do_ad;}; 
 [scriptblock]$remotedesktop= {mstsc}; 
 [scriptblock]$powershell= {do_ps;}; 
 [scriptblock]$extras= {Extras}; 
+[scriptblock]$about= {AboutF}; 
 (addMenuItem -ParentItem ([ref]$mainMenu) -ItemName 'mnuFile' -ItemText 'Active Directory' -ScriptBlock $activedirectory); 
-(addMenuItem -ParentItem ([ref]$mainMenu) -ItemName 'mnuFile' -ItemText 'Remote Desktop' -ScriptBlock $remotedesktop); 
+(addMenuItem -ParentItem ([ref]$mainMenu) -ItemName 'mnuFile' -ItemText 'Remote Desktop' -ScriptBlock $remotedesktop);
 (addMenuItem -ParentItem ([ref]$mainMenu) -ItemName 'mnuFile' -ItemText 'PowerShell' -ScriptBlock $powershell); 
 (addMenuItem -ParentItem ([ref]$mainMenu) -ItemName 'mnuFile' -ItemText 'Extras' -ScriptBlock $extras); 
+(addMenuItem -ParentItem ([ref]$mainMenu) -ItemName 'mnuFile' -ItemText 'About' -ScriptBlock $about); 
 (addMenuItem -ParentItem ([ref]$mainMenu) -ItemName 'mnuFile' -ItemText 'Exit' -ScriptBlock $exit); 
+
+init_menu;
+
 cls
 Write-Host("`n--------------------------------------------------------------------------------------------`n")
 Write-Host("If the window is stuck after choosing the option,`r`nenter the password here (invisible) and confirm with ENTER key`n")
