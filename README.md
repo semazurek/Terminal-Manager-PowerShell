@@ -15,7 +15,7 @@ The script has such things as:
 </ul>
 
 ## First look NEW (GUI)
-![image](https://user-images.githubusercontent.com/85984736/216607937-a80143a9-7101-417a-bb86-d82eda4ba29a.png)
+![image](https://github.com/semazurek/Terminal-Manager-PowerShell/assets/85984736/9d77e8b7-47fe-42a6-832e-dacb1e45ef5a)
 
 ## How to use
 
