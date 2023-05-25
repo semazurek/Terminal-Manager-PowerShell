@@ -14,8 +14,8 @@ The script has such things as:
   <li>Show the current station storage serial numbers.  </li>
 </ul>
 
-## First look NEW (GUI)
-![image](https://github.com/semazurek/Terminal-Manager-PowerShell/assets/85984736/9d77e8b7-47fe-42a6-832e-dacb1e45ef5a)
+## First look (GUI)
+![image](https://github.com/semazurek/Terminal-Manager-PowerShell/assets/85984736/60493b80-f83a-43d1-919e-e5f485ac3ccc)
 
 ## How to use
 
