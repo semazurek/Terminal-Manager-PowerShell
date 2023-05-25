@@ -81,7 +81,7 @@ $G_Command.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($Color)
 $G_Remote.controls.Add($G_Command)
 $G_Command.add_MouseHover({
 $tooltip9 = New-Object System.Windows.Forms.ToolTip
-$tooltip9.SetToolTip($G_Command, "Wykonaj zdalnie komende na stacji.")
+$tooltip9.SetToolTip($G_Command, "Execute commands on the station remotely.")
 }) 
 
 $G_Message = New-Object System.Windows.Forms.GroupBox
@@ -94,7 +94,7 @@ $G_Message.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($Color)
 $G_Remote.controls.Add($G_Message) 
 $G_Message.add_MouseHover({
 $tooltip8 = New-Object System.Windows.Forms.ToolTip
-$tooltip8.SetToolTip($G_Message, "Wyślij komunikat do stacji.")
+$tooltip8.SetToolTip($G_Message, "Send a message to the station.")
 })
 
 $B_gpupdate = New-Object Windows.Forms.Button; 
@@ -107,7 +107,7 @@ $B_gpupdate.add_click({do_gp;});
 $G_Actions.controls.add($B_gpupdate);
 $B_gpupdate.add_MouseHover({
 $tooltip1 = New-Object System.Windows.Forms.ToolTip
-$tooltip1.SetToolTip($B_gpupdate, "gpupdate /force i windows update.")
+$tooltip1.SetToolTip($B_gpupdate, "gpupdate /force and windows update.")
 })
 
 $B_restart = New-Object Windows.Forms.Button; 
@@ -120,7 +120,7 @@ $B_restart.add_click({do_restart;});
 $G_Actions.controls.add($B_restart);
 $B_restart.add_MouseHover({
 $tooltip2 = New-Object System.Windows.Forms.ToolTip
-$tooltip2.SetToolTip($B_restart, "Restartuje stacje po 10 sekundach.")
+$tooltip2.SetToolTip($B_restart, "Restarts stations after 10 seconds.")
 })
 
 $B_shutdown = New-Object Windows.Forms.Button; 
@@ -133,7 +133,7 @@ $B_shutdown.add_click({do_shutdown;});
 $G_Actions.controls.add($B_shutdown);
 $B_shutdown.add_MouseHover({
 $tooltip3 = New-Object System.Windows.Forms.ToolTip
-$tooltip3.SetToolTip($B_shutdown, "Wyłącza stacje po 10 sekundach.")
+$tooltip3.SetToolTip($B_shutdown, "Turns stations off after 10 seconds.")
 })
 
 $B_logoff = New-Object Windows.Forms.Button; 
@@ -146,7 +146,7 @@ $B_logoff.add_click({do_logoff;});
 $G_Actions.controls.add($B_logoff);
 $B_logoff.add_MouseHover({
 $tooltip4 = New-Object System.Windows.Forms.ToolTip
-$tooltip4.SetToolTip($B_logoff, "Wyloguj wybranego użytkownika.")
+$tooltip4.SetToolTip($B_logoff, "Log out selected user.")
 })
 
 $B_address = New-Object Windows.Forms.Button; 
@@ -159,7 +159,7 @@ $B_address.add_click({ChangeIP;});
 $G_Actions.controls.add($B_address);
 $B_address.add_MouseHover({
 $tooltip12 = New-Object System.Windows.Forms.ToolTip
-$tooltip12.SetToolTip($B_address, "Zmień adresacje stacji.")
+$tooltip12.SetToolTip($B_address, "Change station addresses.")
 })
 
 $B_soft = New-Object Windows.Forms.Button; 
@@ -172,7 +172,7 @@ $B_soft.add_click({do_soft;});
 $G_Actions.controls.add($B_soft);
 $B_soft.add_MouseHover({
 $tooltip11 = New-Object System.Windows.Forms.ToolTip
-$tooltip11.SetToolTip($B_soft, "Pokazuje zainstalowane oprogramowanie na stacji.")
+$tooltip11.SetToolTip($B_soft, "Shows the software installed on the station.")
 })
 
 $B_printer = New-Object Windows.Forms.Button; 
@@ -185,7 +185,7 @@ $B_printer.add_click({do_print;});
 $G_Actions.controls.add($B_printer);
 $B_printer.add_MouseHover({
 $tooltip5 = New-Object System.Windows.Forms.ToolTip
-$tooltip5.SetToolTip($B_printer, "Wyświetl podłączone do stacji drukarki.")
+$tooltip5.SetToolTip($B_printer, "View printers connected to the station.")
 })
 
 $B_information = New-Object Windows.Forms.Button; 
@@ -198,7 +198,7 @@ $B_information.add_click({do_information;});
 $G_Actions.controls.add($B_information);
 $B_information.add_MouseHover({
 $tooltip6 = New-Object System.Windows.Forms.ToolTip
-$tooltip6.SetToolTip($B_information, "Wyświetl informacje o stacji.")
+$tooltip6.SetToolTip($B_information, "Display station information.")
 })
 
 $B_printer2 = New-Object Windows.Forms.Button; 
@@ -211,7 +211,7 @@ $B_printer2.add_click({do_res_printers;});
 $G_Actions.controls.add($B_printer2);
 $B_printer2.add_MouseHover({
 $tooltip7 = New-Object System.Windows.Forms.ToolTip
-$tooltip7.SetToolTip($B_printer2, "Restart usługi Bufora Wydruku")
+$tooltip7.SetToolTip($B_printer2, "Restart of the Spooler Printout service")
 })
 
 function init_menu {
