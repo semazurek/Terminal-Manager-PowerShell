@@ -394,7 +394,7 @@ $hostn = $IP_TEXT.Text;
   	(New-Object -ComObject Wscript.Shell).Popup("Address: $hostn is connected.",0,"Terminal Manager",0x40 + 4096)
   	}
    	else {
-    	(New-Object -ComObject Wscript.Shell).Popup("Address: $hostn not responding",0,"Terminal Manager",0x40 + 4096)
+    	(New-Object -ComObject Wscript.Shell).Popup("Address: $hostn not responding",0,"Terminal Manager",0x10 + 4096)
      	}
 }
 
