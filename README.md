@@ -12,58 +12,20 @@ The script has such things as:
   <li>Information about current station.  </li>
   <li>Send remote messages to the station.  </li>
   <li>Show the current station storage serial numbers.  </li>
+  <li>Show running tasks and end choosen one.</li>
 </ul>
 
 ## First look (GUI)
-![image](https://github.com/semazurek/Terminal-Manager-PowerShell/assets/85984736/60493b80-f83a-43d1-919e-e5f485ac3ccc)
+<p align="center">
+<img src="https://github.com/semazurek/Terminal-Manager-PowerShell/assets/85984736/d57edf22-bfcc-4981-b152-93b134ac0a90"  width="600">
+</p>
 
 ## How to use
 
-You will probably need to change credentials to Domain Administrator of AD.  
-It is 7th line in code of Terminal Manager.ps1  
+You will probably need to change credentials to Domain Administrator of AD.
+<p align="center">
+<img src="https://github.com/semazurek/Terminal-Manager-PowerShell/assets/85984736/d7ed39c0-4c8c-4a3f-b9ef-bf8396e5c7fc" width="300">
+</p>
 (If you are already logged in, you don't have to change anything, because script will get it from Windows)  
 
-```
-#CREDENTIALS USED BY YOU:
-$credent = $env:USERNAME+'@'+$env:USERDOMAIN
-```
-
-Value $credent stores information like so: username@localdomain.com and you can change it to whatever you want like:  
-
-```
-$credent = 'JohnSmith@'+$env:USERDOMAIN
-```
-or 
-```
-$credent = 'JohnSmith@Workdomain.com'
-```
 *<p align="center">And you are ready to go !</p>*
-
-## Tips
-
-### Get information about remote station
-Use option: **Executing commands at the station**  
-Type IP/Hostname and Command:  
-```
-systeminfo > C:\file.txt
-```
-After that in windows explorer type:  
-```
-\\IP/Hostname\c$
-```
-And view **file.txt** with all information in it.
-
-### Get information about installed printers on remote station
-Use option: **Powershell**  
-
-```
-Get-Printer -ComputerName IP/Hostname
-```
-This command provides information like:  
-<ul>
-  <li>Name of driver</li>
-  <li>Local/Shared Printer</li>
-  <li>Published (to others shared)</li>
-  <li>Driver Name</li>
-  <li>Port Name</li>
-</ul>
