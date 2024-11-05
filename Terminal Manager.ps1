@@ -1210,7 +1210,7 @@ function addMenuItem { param([ref]$ParentItem, [string]$ItemName='', [string]$It
 	$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuFileEX7' -ItemText 'Event Viewer' -ScriptBlock $mnuFileEX7;
 	$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuFileEX8' -ItemText 'Registry Editor' -ScriptBlock $mnuFileEX8;
 	$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuFileEX9' -ItemText 'Credential Manager' -ScriptBlock $mnuFileEX9;
-	$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuFileEX10' -ItemText 'Restart to BIOS-u' -ScriptBlock $mnuFileEX10;
+	$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuFileEX10' -ItemText 'Restart to BIOS' -ScriptBlock $mnuFileEX10;
 	} | Out-Null
 	(addMenuItem -ParentItem ([ref]$mainMenu) -ItemName 'mnuFileAB' -ItemText 'About' -ScriptBlock $about); 
 	
