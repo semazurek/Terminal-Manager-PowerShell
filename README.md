@@ -17,8 +17,8 @@ The script has such things as:
 
 ## First look (GUI)
 <p align="center">
-<img src="https://github.com/user-attachments/assets/aa5fb4ff-b948-4040-b56e-c21b55156a7e"  width="600">
-  
+<img src="https://github.com/user-attachments/assets/b93e3d44-d751-4348-8af3-fa9d4ae6b58d"  width="600">
+
 </p>
 
 ## How to use
