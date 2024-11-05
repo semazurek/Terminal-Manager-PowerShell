@@ -152,7 +152,7 @@ $form.Icon = [System.Drawing.Icon]::FromHandle((new-object System.Drawing.Bitmap
 
 $G_Remote = New-Object System.Windows.Forms.GroupBox
 $G_Remote.Location = '10,30' 
-$G_Remote.size = '790,390'
+$G_Remote.size = '790,305'
 $G_Remote.text = 'Remote'
 $G_Remote.Visible = $true
 $G_Remote.Font = New-Object System.Drawing.Font('Consolas',11,[System.Drawing.FontStyle]::Bold); 
