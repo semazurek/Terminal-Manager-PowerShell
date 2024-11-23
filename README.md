@@ -1,5 +1,9 @@
 # Terminal Manager
 
+<a href="#"><img src="https://img.shields.io/badge/RELEASE-v2.0-blue?style=for-the-badge&"></a>
+<a href="#"><img src="https://img.shields.io/badge/powershell-5391FE?style=for-the-badge&logo=powershell&logoColor=white"></a>
+<a href="https://www.buymeacoffee.com/semazurek" target="_blank"><img src="https://img.shields.io/badge/buymeacoffee-27ae60?style=for-the-badge&logo=buymeacoffee&logoColor=white"></a>
+
 PowerShell Script for remote management computers in a domain.  
 Getch information about local station. Last tested on Windows 10/11 Enterprise version 23H2.  
 
